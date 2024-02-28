@@ -10,7 +10,7 @@ This version of the WSUS Connector is compatible with OpCon Release(s) 16.1.2 an
 
 ### 2021 August
 
-"white_check_mark: Fixed an issue in WSUS connector where on Windows 2019, the connector job would keep running and never reboot the server on which the updates are to be applied.
+:white_check_mark: Fixed an issue in WSUS connector where on Windows 2019, the connector job would keep running and never reboot the server on which the updates are to be applied.
 
 ## Version 16.1.0.0 Fixes
 
