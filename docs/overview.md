@@ -5,7 +5,7 @@ The WSUS Connector, Version 21.0.0, provides the capability to monitor, download
 
 ###  Scope
 
-This documentation provides basic and advanced, conceptual and procedural information for running the WSUS Connector. Information on running the central OpCon components falls outside the scope of this doc- ument. For information on OpCon, refer to Getting Started with OpCon in the Concepts documentation.
+This documentation provides basic and advanced, conceptual and procedural information for running the WSUS Connector. Information on running the central OpCon components falls outside the scope of this doc- ument. For information on OpCon, refer to Getting Started with OpCon in the [Concepts](https://help.smatechnologies.com/opcon/core/components) documentation.
 
 ### Audience
 
