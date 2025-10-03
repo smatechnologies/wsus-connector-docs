@@ -14,7 +14,7 @@ The server component is scheduled through OpCon as a Microsoft LSAM job (prefera
 
 ### Client Configuration
 
-In preparation to use the WSUS Connector, you will need to make sure the client folder and its files are prop- erly configured. The client component processes, downloads, and installs Windows updates and is run through a built-in Windows scheduler on the machine that needs to be updated.
+In preparation to use the WSUS Connector, you will need to make sure the client folder and its files are properly configured. The client component processes, downloads, and installs Windows updates and is run through a built-in Windows scheduler on the machine that needs to be updated.
 
 Ideally, the client component can be deployed in a single location on the network that is accessible (through shared UNC path) to all the machines that need to use it or can be alternatively deployed on individual client machines that need to be updated. The client piece consists of following components:
 

@@ -40,7 +40,7 @@ To install a new WSUS Connector, complete the procedures in this section.
 
 7. Click Save on the Global Properties toolbar. 
 
-### Sub-Type Installation
+### Enterprise Manager Sub-Type Installation
 
 If you need to update the Enterprise Manager with a screen to define the WSUS jobs, you will need to install the WSUS Sub-Type.
 
@@ -90,6 +90,63 @@ If you need to update the Enterprise Manager with a screen to define the WSUS jo
 #### Client Configuration
 
 For more information on Client configuration and how to share the Client folder, refer to [Client Configuration](configuration#client-configuration). 
+
+### Solution Manager Sub-Type Installation
+
+It should be noted that all interactions with the Solution Manager sub-type can only be completed using Solution Manager.
+
+Download the ACSWSUS.zip file from the ftp site under **OpCon Releases\\Integrations\\WSUS**.
+
+Extract the **ACSWSUS** directory and copy this into the **\\SAM\\plugins** for OpCon and relay installations.
+
+For OpCon installations stop and restart the **SMA OpCon RestAPI** and **SMA OpCon Service Manager** services, for Relay stop and restart the **Relay Service**.
+
+## Create the scripts
+When using the Solution Manager sub-type, two scripts must be created. The first script contains the Connector.config information and the second script contains the drop-down list information.
+
+Using Solution Manager
+- Select **Library**.
+- Select **Scripts**.
+- Select **Script Types** from the upper right hand corner. 
+    - Select **+Add**
+    - In the ***Name*** field enter **ACSWSUS**.
+    - In the ***File Extension field*** enter **txt**.
+    - In the ***Description*** field enter **Used for ACSWSUS Integration**.
+    - Select Save.
+- Select **Script Runners** from the upper right hand corner. 
+    - Select **+Add**
+    - In the ***Name*** field enter **ACSWSUS**.
+    - In the ***OS*** field select **WSUS** from the drop-down list.
+    - In the ***Type*** field select **ACSWSUS** from the drop-down list.
+    - In the ***Command*** field enter **cmd.exe /c**.
+    - Select Save.
+- Select **Scripts** from the upper right hand corner.
+    - Create the Connector.config script.
+    - Select **+Add**.
+    - In the ***Name*** field enter a name for the script. It is suggested using the proposed agent name and append **_config** to the name. 
+    - In the ***Type*** field select **ACSWSUS** from the drop-down list.
+    - Assign the required roles.
+    - In the ***Script*** paste the contents of the created Connector.config file.
+    - Select Save.
+ 
+## Create WSUS Agent Definition
+
+Using Solution Manager
+- Select **Library**.
+- Select **Agents**.
+    - Select **+Add**
+    - In the ***Name*** field enter the name of the agent.
+    - Select **WSUS** from the ***Type*** drop-down list.
+    - In the ***SAP Data Services Settings*** section enter the required information.
+    - In the ***Client Information*** section
+        - In the ***Directory*** field enter the installation directory of the AzureVM Connector.
+        - In the ***Name*** field insert **SMAWSUS.exe** (default value).
+        - In the ***Config File Name*** field insert **Connector.config** (default value).
+    - In the ***Config Script*** section
+        - Select **ACSWSUS** from the ***Script Runner*** drop-down list.
+        - Select the config script you previously created from the ***Script*** drop-down list.
+
+- Select **Save**.
 
 ### Upgrade Installation
 
