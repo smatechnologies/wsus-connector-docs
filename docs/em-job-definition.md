@@ -1,4 +1,4 @@
-# Job Definition
+# Enterprise Manager Job Definition
 
 The WSUS Connector includes a job sub-type to assist with the definition of WSUS jobs. When defining a job in the Enterprise Manager or the Job Type steps, make sure you:
 
