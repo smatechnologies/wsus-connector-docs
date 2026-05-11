@@ -1,22 +1,37 @@
-# Release Notes
+---
+sidebar_label: 'Release notes'
+title: WSUS Connector release notes
+description: "Version history and change details for the WSUS Connector, including new features, improvements, and bug fixes."
+tags:
+  - Reference
+  - System Administrator
+  - Connectors
+---
 
-These release notes include all enhancements and fixed issues for the WSUS Connector.
+# WSUS Connector release notes
 
 ## Compatibility
 
 This version of the WSUS Connector is compatible with OpCon Release(s) 16.1.2 and higher.
 
-## Version 21.0.0 Fixes
+## 21
 
-### 2021 August
+### 21.0.0
 
-:white_check_mark: Fixed an issue in WSUS connector where on Windows 2019, the connector job would keep running and never reboot the server on which the updates are to be applied.
+2021 August
 
-## Version 16.1.0.0 Fixes
+#### Fixes
 
-### 2016 November
+:white_check_mark: Fixed an issue in WSUS Connector where on Windows 2019, the connector job would keep running and never reboot the server on which the updates are to be applied.
 
-:white_check_mark: Fixed an issue where the WSUS Connector failed to get updates if Include List and/or Exclude List were defined under WSUS Job Details.
+## 16
+
+### 16.1.0.0
+
+2016 November
+
+#### Fixes
+
+:white_check_mark: Fixed an issue where the WSUS Connector failed to get updates if Include List or Exclude List were defined under WSUS Job Details.
 
 :white_check_mark: Fixed an issue with the connector where WSUS updates would not get installed on machines in a different time zone.
-

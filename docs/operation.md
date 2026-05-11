@@ -1,16 +1,74 @@
+---
+sidebar_label: 'Operation'
+title: WSUS Connector operation
+description: "Reference for the WSUS Connector operation parameters that drive update checks, installation, and target-server reboot behavior."
+tags:
+  - Reference
+  - Automation Engineer
+  - Operations Staff
+  - Connectors
+---
+
 # Operation
 
-SMA Technologies recommends defining the WSUS job as a Multi-Instance job with Server Name as an Instance property. The list of servers that want to use this job can be defined in Instance Definition. When the job is built this way, the individual job names automatically use the first instance property name, and each WSUS job gets identified by the server it is going to update, as shown in this next table.
+## What is it?
 
-### Operation Parameters
+This page describes the runtime parameters the WSUS Connector accepts and the recommended pattern for applying updates to many servers from a single OpCon job definition.
+
+Use this page to:
+
+* Look up what each WSUS Connector parameter controls.
+* Configure a Multi-Instance WSUS job for multiple target servers.
+* Understand how the connector handles inclusion lists, exclusion lists, and reboots.
+
+## Recommended pattern
+
+SMA Technologies recommends defining the WSUS job as a **Multi-Instance job** with Server Name as an instance property. List the target servers in the Instance Definition.
+
+With this pattern:
+
+* OpCon builds one job per server.
+* Each built job is automatically named after the server it updates.
+* Each built job runs and reports independently.
+
+## Operation parameters
 
 The WSUS Connector supports the following parameters:
 
-| Argument | Required | Value |
-| -------- | -------- | ----- |
-| Server Name | Y | The machine on which the Microsoft updates are to be checked or installed. |
-| Application Path | Y | The path to the location of SMAMSUpdate.exe to be used (on the local machine or shared UNC path on the network, e.g., `\\<SharedServer- >\WSUS\SMAMSUpdate.exe`) |
-| Retrieve Updated List | Optional | This option specifies to check only for updates and not download or install them. The list of required updates is available in the JobOutput after the job is run in CheckOnly mode. |
-| Include List | Optional | A text file containing a list of updates you want installed on the machine. If an inclusion list is provided, only updates from this list will be installed, provided they are needed for the machine. |
-| Exclude List | Optional | A text file containing a list of updates you do not want installed on the machine. If an exclusion list is provided, the program will check for available updates for the machine and then exclude the ones from the provided list and install the rest. |
-| Restart | Optional | Restart specifies an update requires a reboot of the machine. If a machine is restarted by the program, the program will wait to verify that the machine comes back online successfully (for up to 10 minutes) and then finish successfully. If the machine fails to come back online, the program will report as failed so the user can check the machine status manually. |
+| Parameter | Required | Description |
+| --------- | -------- | ----------- |
+| **Server Name** | Yes | The machine on which the Microsoft updates are to be checked or installed. |
+| **Application Path** | Yes | The path to `SMAMSUpdate.exe`. Use the local path on the target machine or a shared UNC path on the network. Example: `\\<SharedServer>\WSUS\SMAMSUpdate.exe` |
+| **Retrieve Update List** | No | Checks for updates without downloading or installing them. The list of required updates appears in the Job Output after the job is run in CheckOnly mode. |
+| **Include List** | No | Text file listing the updates to install. If provided, only updates from this list are installed (and only if needed on the machine). |
+| **Exclude List** | No | Text file listing the updates to skip. If provided, the connector installs all needed updates except those listed. |
+| **Restart** | No | Allows the connector to reboot the machine when an update requires it. See "Restart behavior" below. |
+
+### Restart behavior
+
+When **Restart** is enabled and an update requires a reboot:
+
+1. The connector reboots the machine.
+2. The connector waits up to **10 minutes** for the machine to come back online.
+3. If the machine returns within 10 minutes, the connector finishes successfully.
+4. If the machine does not return within 10 minutes, the connector reports the job as Failed so a person can check the machine manually.
+
+## FAQs
+
+**Why a Multi-Instance job?**
+A single Multi-Instance job lets one definition apply updates to many servers, with one built job per server. Each built job is named after the server it updates and reports its status independently.
+
+**What happens if a target server fails to come back online after a reboot?**
+The connector waits up to 10 minutes. If the machine does not return, the connector reports the job as Failed so a person can check the machine manually.
+
+**Where do I see the list of updates the connector found in CheckOnly mode?**
+In the Job Output for the WSUS job. The list of required updates is captured there when **Retrieve Update List** is selected.
+
+## Glossary
+
+| Term | Definition |
+| ---- | ---------- |
+| CheckOnly mode | The WSUS Connector mode enabled by **Retrieve Update List**. The connector reports available updates without installing them. |
+| Multi-Instance job | An OpCon job definition with one or more instance properties. OpCon produces one built job per instance when the schedule is built. |
+| Instance property | A property whose value differs across the instances of a Multi-Instance job — for the WSUS Connector, typically the target Server Name. |
+| Job Output | The output captured by OpCon for a built job, accessible via the **View Job Output** action. |

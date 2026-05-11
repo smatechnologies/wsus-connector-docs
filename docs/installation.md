@@ -1,157 +1,238 @@
+---
+sidebar_label: 'Installation'
+title: WSUS Connector installation
+description: "Install, configure, and upgrade the WSUS Connector, including the Enterprise Manager and Solution Manager sub-types."
+tags:
+  - Procedural
+  - System Administrator
+  - Connectors
+  - Installation
+---
+
 # Installation
 
-### Requirements
+## What is it?
 
-Before beginning the installation, ensure the system requirements are met. The supported software levels include:
+Installing the WSUS Connector puts the components OpCon needs to run Windows Update jobs in place. The installation has three independent parts:
 
-* Any supported version o fWindows with .NETF ramework 4.5i nstalled. 
-* A supported version of the MSLSAM installed on the machine.
+| Part | When you need it |
+| ---- | ---------------- |
+| WSUS Connector | Always. Provides the server and client components. |
+| Enterprise Manager sub-type | If you define WSUS jobs in the **Enterprise Manager** UI. |
+| Solution Manager sub-type | If you define WSUS jobs in the **Solution Manager** UI. |
 
-### New Installation
+You only need the sub-type that matches the OpCon UI you use.
 
-To install a new WSUS Connector, complete the procedures in this section.
+## Requirements
 
-#### WSUS Connector Installation
+Before beginning the installation, ensure the system requirements are met:
 
-1. Log in to the machine as a Local Administrator on the Windows machine where the connector will be installed.
-2. Download the files from the [http://files.smastechnologies.com/](http://files.smatechnologies.com/) site.
-3. Enter your valid username and password and click Login.
-4. Navigate to `Root Folder/Connectors` and `Add-ons/Connectors/WSUS`.
-5. Double-click the `SMA OpCon WSUS Connector Install.exe`. The Select Language screen displays.
-6. Select the desired language for the installation screens and click OK. The Welcome screen displays.
-7. Click Next.
-8. In the remaining wizard screens: Complete the wizard.
-9. In the last wizard screen: Click Done.
+* Any supported version of Windows with **.NET Framework 4.5** installed.
+* A supported version of the **Microsoft Agent** installed on the machine.
 
-#### WSUSPath Global Property Configuration
+## Install the WSUS Connector
 
-1. Log in to the Enterprise Manager on the Windows machine where an Enterprise Manager is installed.
-2. Double-click on **Global Properties** under the Administration topic in the Navigation Panel. The Global Properties screen displays.
-3. Click **Add** on the Global Properties toolbar.
-4. Enter **WSUSPath** in the Name text box.
-5. Enter the documentation in the Documentation text box.
-6. In the **Value** text box: Enter the *path to the SMAWSUS.exe* on the Windows machine. **Do not** include the trailing backslash in the path.
+This is the base install. Complete this section before installing either sub-type.
 
-:::tip Example
+### Step 1: Install the connector
 
-`C:\Program Files\OpConxps\WSUS`
+To install the WSUS Connector, complete the following steps:
 
-:::
+1. Log in to the Windows machine where the connector will be installed as a Local Administrator.
+2. Download the files from [http://files.smatechnologies.com/](http://files.smatechnologies.com/).
+3. Enter your username and password and select **Login**.
+4. Go to **Root Folder > Connectors > Add-ons > Connectors > WSUS**.
+5. Open `SMA OpCon WSUS Connector Install.exe`. The Select Language screen displays.
+6. Select the desired language and select **OK**. The Welcome screen displays.
+7. Select **Next**.
+8. Complete the remaining wizard screens.
+9. On the last wizard screen, select **Done**.
 
-7. Click Save on the Global Properties toolbar. 
+### Step 2: Configure the WSUSPath global property
 
-### Enterprise Manager Sub-Type Installation
+The `WSUSPath` global property tells OpCon where `SMAWSUS.exe` lives on the Windows machine.
 
-If you need to update the Enterprise Manager with a screen to define the WSUS jobs, you will need to install the WSUS Sub-Type.
+To configure the global property, complete the following steps:
 
-#### WSUS Sub-Type Installation
+1. Log in to the Enterprise Manager.
+2. Open **Global Properties** under the Administration topic in the Navigation Panel. The Global Properties screen displays.
+3. Select **Add** on the Global Properties toolbar.
+4. In the **Name** text box, enter `WSUSPath`.
+5. In the **Documentation** text box, enter documentation for the property.
+6. In the **Value** text box, enter the path to `SMAWSUS.exe`.
+
+   :::caution
+
+   Do **not** include a trailing backslash in the path.
+
+   :::
+
+   :::tip Example
+
+   `C:\Program Files\OpConxps\WSUS`
+
+   :::
+
+7. Select **Save** on the Global Properties toolbar.
+
+## Install the Enterprise Manager sub-type
+
+Install this sub-type only if you define WSUS jobs in Enterprise Manager.
+
+### Step 1: Install the WSUS sub-type
+
+To install the WSUS sub-type, complete the following steps:
 
 1. Log in to the machine where the Enterprise Manager is installed.
-2. Navigate to the EnterpriseManager folder in Windows Explorer.
+2. Go to the EnterpriseManager folder in Windows Explorer.
 
-:::tip Example
+   :::tip Example
 
-`C:\Program Files\OpConxps\EnterpriseManager x64`
+   `C:\Program Files\OpConxps\EnterpriseManager x64`
 
-:::
+   :::
 
-3. Confirm the dropins folder exists. If the folder does not exist, right-click in the EnterpriseManager folder, select **New > Folder**, and name the folder **dropins**.
-4. Navigate to the location where you installed the WSUS Connector.
+3. Confirm the `dropins` folder exists. If it does not, right-click the EnterpriseManager folder, select **New > Folder**, and name the new folder `dropins`.
+4. Go to the location where you installed the WSUS Connector.
 
-:::tip Example
+   :::tip Example
 
-`C:\Program Files\OpConxps\WSUS`
+   `C:\Program Files\OpConxps\WSUS`
 
-:::
+   :::
 
 5. Open the **EMPlugins** folder and copy the jar file.
 
-:::tip Example
+   :::tip Example
 
-`com.sma.ui.core.jobdetails.wsus_1.0.0.yyyymmddhhss.jar`
+   `com.sma.ui.core.jobdetails.wsus_1.0.0.yyyymmddhhss.jar`
+
+   :::
+
+6. Paste the jar file into the `EnterpriseManager\dropins` folder on the Enterprise Manager machine.
+
+   :::tip Example
+
+   `C:\Program Files\OpConxps\EnterpriseManager x64\dropins\com.sma.ui.core.jobdetails.wsus_1.0.0.yyyymmddhhss.jar`
+
+   :::
+
+### Step 2: Verify the sub-type is registered
+
+To verify the sub-type loaded into Enterprise Manager, complete the following steps:
+
+1. Log in to the Enterprise Manager.
+2. Open **Job Master** under the Administration topic in the Navigation Panel. The Job Master screen displays.
+3. Select a schedule in the **Schedule** list.
+4. Select **Add** on the Job Master toolbar.
+5. Under Job Properties in the Job Details frame, select **Windows** in the **Job Type** list.
+6. Select **WSUS** in the **Job Sub-Type** list to confirm that the sub-type is installed.
+
+### Agent configuration
+
+For information about agent configuration and how to share the Client folder, see [Configuration](configuration#client-configuration).
+
+## Install the Solution Manager sub-type
+
+Install this sub-type only if you define WSUS jobs in Solution Manager.
+
+:::info Note
+
+All interactions with the Solution Manager sub-type can only be completed using Solution Manager.
 
 :::
 
-6. Paste the *jar file* to the **EnterpriseManager\dropins** folder on the Enterprise Manager machine.
+### Step 1: Deploy the plug-in files
 
-:::tip Example
+To deploy the plug-in files, complete the following steps:
 
-`C:\Program Files\OpConxps\EnterpriseManager x64\dropins\com.sma.ui.core.jobdetails.wsus_1.0.0.yyyymmddhhss.jar`
+1. Download `ACSWSUS.zip` from the ftp site under **OpCon Releases > Integrations > WSUS**.
+2. Extract the `ACSWSUS` directory and copy it into the `\SAM\plugins` folder for OpCon and relay installations.
+3. Restart the appropriate services:
 
-:::
+   | Environment | Services to restart |
+   | ----------- | ------------------- |
+   | OpCon | **SMA OpCon RestAPI** and **SMA OpCon Service Manager** |
+   | Relay | **Relay Service** |
 
-7. Log in to the Enterprise Manager on the Windows machine where an Enterprise Manager is installed.
-8. Double-click on Job Master under the Administration topic in the Navigation Panel. The Job Master screen displays.
-9. Select a schedule in the Schedule drop-down list.
-10. Click **Add** on the Job Master toolbar.
-11. Under Job Properties in the Job Details frame: Select **Windows** in the **Job Type** drop-down list.
-12. Select **WSUS** in the **Job Sub-Type** drop-down list to confirm that the sub-type is installed.
+### Step 2: Create the scripts
 
-#### Client Configuration
+Two scripts are required when using the Solution Manager sub-type:
 
-For more information on Client configuration and how to share the Client folder, refer to [Client Configuration](configuration#client-configuration). 
+* A **Connector.config** script that holds the connector configuration.
+* A script that holds the list information.
 
-### Solution Manager Sub-Type Installation
+To create the scripts, complete the following steps in Solution Manager:
 
-It should be noted that all interactions with the Solution Manager sub-type can only be completed using Solution Manager.
+1. Go to **Library > Scripts**.
+2. Create the script type:
+    1. Select **Script Types** from the upper right corner, then **+Add**.
+    2. In the **Name** field, enter `ACSWSUS`.
+    3. In the **File Extension** field, enter `txt`.
+    4. In the **Description** field, enter `Used for ACSWSUS Integration`.
+    5. Select **Save**.
+3. Create the script runner:
+    1. Select **Script Runners** from the upper right corner, then **+Add**.
+    2. In the **Name** field, enter `ACSWSUS`.
+    3. In the **OS** field, select `WSUS` from the list.
+    4. In the **Type** field, select `ACSWSUS` from the list.
+    5. In the **Command** field, enter `cmd.exe /c`.
+    6. Select **Save**.
+4. Create the **Connector.config** script:
+    1. Select **Scripts** from the upper right corner, then **+Add**.
+    2. In the **Name** field, enter a name for the script. SMA Technologies suggests using the proposed agent name with `_config` appended.
+    3. In the **Type** field, select `ACSWSUS` from the list.
+    4. Assign the required roles.
+    5. In the **Script** field, paste the contents of the created Connector.config file.
+    6. Select **Save**.
 
-Download the ACSWSUS.zip file from the ftp site under **OpCon Releases\\Integrations\\WSUS**.
+### Step 3: Create the WSUS agent definition
 
-Extract the **ACSWSUS** directory and copy this into the **\\SAM\\plugins** for OpCon and relay installations.
+To create the agent definition, complete the following steps in Solution Manager:
 
-For OpCon installations stop and restart the **SMA OpCon RestAPI** and **SMA OpCon Service Manager** services, for Relay stop and restart the **Relay Service**.
+1. Go to **Library > Agents**.
+2. Select **+Add**.
+3. In the **Name** field, enter the name of the agent.
+4. In the **Type** list, select `WSUS`.
+5. In the **SAP Data Services Settings** section, enter the required information.
+6. In the **Client Information** section:
+    * In the **Directory** field, enter the installation directory of the AzureVM Connector.
+    * In the **Name** field, enter `SMAWSUS.exe` (default value).
+    * In the **Config File Name** field, enter `Connector.config` (default value).
+7. In the **Config Script** section:
+    * In the **Script Runner** list, select `ACSWSUS`.
+    * In the **Script** list, select the config script you previously created.
+8. Select **Save**.
 
-## Create the scripts
-When using the Solution Manager sub-type, two scripts must be created. The first script contains the Connector.config information and the second script contains the drop-down list information.
+## Upgrade an existing installation
 
-Using Solution Manager
-- Select **Library**.
-- Select **Scripts**.
-- Select **Script Types** from the upper right hand corner. 
-    - Select **+Add**
-    - In the ***Name*** field enter **ACSWSUS**.
-    - In the ***File Extension field*** enter **txt**.
-    - In the ***Description*** field enter **Used for ACSWSUS Integration**.
-    - Select Save.
-- Select **Script Runners** from the upper right hand corner. 
-    - Select **+Add**
-    - In the ***Name*** field enter **ACSWSUS**.
-    - In the ***OS*** field select **WSUS** from the drop-down list.
-    - In the ***Type*** field select **ACSWSUS** from the drop-down list.
-    - In the ***Command*** field enter **cmd.exe /c**.
-    - Select Save.
-- Select **Scripts** from the upper right hand corner.
-    - Create the Connector.config script.
-    - Select **+Add**.
-    - In the ***Name*** field enter a name for the script. It is suggested using the proposed agent name and append **_config** to the name. 
-    - In the ***Type*** field select **ACSWSUS** from the drop-down list.
-    - Assign the required roles.
-    - In the ***Script*** paste the contents of the created Connector.config file.
-    - Select Save.
- 
-## Create WSUS Agent Definition
+To upgrade the WSUS Connector, install the new package over the previous installation. The installation package preserves your configuration files automatically.
 
-Using Solution Manager
-- Select **Library**.
-- Select **Agents**.
-    - Select **+Add**
-    - In the ***Name*** field enter the name of the agent.
-    - Select **WSUS** from the ***Type*** drop-down list.
-    - In the ***SAP Data Services Settings*** section enter the required information.
-    - In the ***Client Information*** section
-        - In the ***Directory*** field enter the installation directory of the AzureVM Connector.
-        - In the ***Name*** field insert **SMAWSUS.exe** (default value).
-        - In the ***Config File Name*** field insert **Connector.config** (default value).
-    - In the ***Config Script*** section
-        - Select **ACSWSUS** from the ***Script Runner*** drop-down list.
-        - Select the config script you previously created from the ***Script*** drop-down list.
+For installation steps, see [Install the WSUS Connector](#install-the-wsus-connector).
 
-- Select **Save**.
+## Silent mode
 
-### Upgrade Installation
+To install the WSUS Connector in silent mode, see [Silent Mode](https://help.smatechnologies.com/opcon/core/installation/components#silent-mode) in the OpCon Installation documentation.
 
-To upgrade the WSUS Connector, simply install the new package to the same directory as the previous install- ation. The installation package will preserve your configuration files automatically. For installation instructions, refer to [New Installation](#new-installation).
+## FAQs
 
-### Silent Mode
+**What if the Enterprise Manager `dropins` folder does not exist?**
+Create it. Right-click the EnterpriseManager folder, select **New > Folder**, and name the folder `dropins`.
 
-To learn how to install the WSUS Connector in silent mode, refer to [Silent Mode](https://help.smatechnologies.com/opcon/core/installation/components#silent-mode) in the OpCon Installation documentation.
+**Do I need both the Enterprise Manager and Solution Manager sub-types?**
+No. Install only the sub-type that matches the OpCon UI you use to define WSUS jobs.
+
+**Where do I install the client component?**
+Either on each target server, or once in a shared UNC location accessible to all target servers. The path is provided to the connector at job submission time.
+
+**What happens to my configuration during an upgrade?**
+The installation package preserves your existing configuration files automatically when installed to the same directory.
+
+## Glossary
+
+| Term | Definition |
+| ---- | ---------- |
+| Connector | The OpCon component that integrates with an external system. The WSUS Connector integrates with Windows Server Update Services. |
+| Sub-type | A specialized job definition screen that simplifies generating the command line for a connector. |
+| Global Property | A named value managed in OpCon and referenced by jobs and connectors at run time. `WSUSPath` is the global property used by the WSUS Connector. |
+| dropins | The Enterprise Manager folder where plug-in jar files are placed so that Enterprise Manager loads them on start. |

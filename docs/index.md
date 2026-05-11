@@ -1,20 +1,68 @@
 ---
-slug: '/'
-sidebar_label: 'WSUS Connector'
+slug: "/"
+hide_table_of_contents: true
 ---
 
-# Overview
+# WSUS Connector
 
-The WSUS Connector, Version 21.0.0, provides the capability to monitor, download, and install Windows updates for Microsoft Servers from within an OpCon workflow. The servers can be optionally rebooted after the updates are applied.
+The WSUS Connector provides the capability to monitor, download, and install Windows updates for Microsoft Servers from within an OpCon workflow.
 
-###  Scope
+<div style={{display: 'flex', gap: '0.75rem', alignItems: 'flex-start', flexWrap: 'wrap', marginTop: '1rem'}}>
 
-This documentation provides basic and advanced, conceptual and procedural information for running the WSUS Connector. Information on running the central OpCon components falls outside the scope of this doc- ument. For information on OpCon, refer to Getting Started with OpCon in the [Concepts](https://help.smatechnologies.com/opcon/core/components) documentation.
+<div style={{flex: '1', minWidth: '160px', display: 'flex', flexDirection: 'column', gap: '0.6rem'}}>
 
-### Audience
+<div style={{background: 'var(--ifm-card-background-color)', border: '1px solid var(--ifm-color-emphasis-400)', borderRadius: '10px', padding: '0.75rem 1rem'}}>
 
-This documentation is written for users with a working knowledge of the Windows Server Update Services (WSUS) program and a basic understanding of automated job scheduling concepts.
+### Overview
 
-### Windows File Names
+- [Overview](./overview.md)
+- [Release Notes](./release-notes.md)
 
-Some systems will not allow long file names (e.g., `C:\Program Files\OpConxps\`). To work around this, revert to method 8.3. In this method, the 7th character becomes a tilde followed by a 1 (e.g., `C:\Pro- gra~1\OpConxps\`).
+</div>
+
+<div style={{background: 'var(--ifm-card-background-color)', border: '1px solid var(--ifm-color-emphasis-400)', borderRadius: '10px', padding: '0.75rem 1rem'}}>
+
+### Installation
+
+- [Installation](./installation.md)
+- [Configuration](./configuration.md)
+
+</div>
+
+</div>
+
+<div style={{flex: '1', minWidth: '160px', display: 'flex', flexDirection: 'column', gap: '0.6rem'}}>
+
+<div style={{background: 'var(--ifm-card-background-color)', border: '1px solid var(--ifm-color-emphasis-400)', borderRadius: '10px', padding: '0.75rem 1rem'}}>
+
+### Concepts
+
+- [Implementation](./implementation.md)
+- [Operation](./operation.md)
+
+</div>
+
+</div>
+
+<div style={{flex: '1', minWidth: '160px', display: 'flex', flexDirection: 'column', gap: '0.6rem'}}>
+
+<div style={{background: 'var(--ifm-card-background-color)', border: '1px solid var(--ifm-color-emphasis-400)', borderRadius: '10px', padding: '0.75rem 1rem'}}>
+
+### Job Definition
+
+- [Enterprise Manager](./em-job-definition.md)
+- [Solution Manager](./sm-job-definition.md)
+
+</div>
+
+<div style={{background: 'var(--ifm-card-background-color)', border: '1px solid var(--ifm-color-emphasis-400)', borderRadius: '10px', padding: '0.75rem 1rem'}}>
+
+### Reference
+
+- [Reference Information](./reference-information.md)
+
+</div>
+
+</div>
+
+</div>
