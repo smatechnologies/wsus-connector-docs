@@ -14,6 +14,10 @@ tags:
 
 This version of the WSUS Connector is compatible with OpCon Release(s) 16.1.2 and higher.
 
+:::note
+This history covers the connector releases that were documented. Entries are not recorded for every build tagged in the product's history.
+:::
+
 ## 21
 
 ### 21.0.0
