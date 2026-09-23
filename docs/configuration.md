@@ -31,7 +31,7 @@ The server component is scheduled through OpCon as a Microsoft Agent job. SMA Te
 The server piece consists of:
 
 * `SMAWSUS.exe`
-* `Taskscheduler.dll`
+* `ComTaskScheduler.dll`
 * `CommandLine.dll`
 
 ## Client configuration

@@ -43,8 +43,9 @@ The **Job Details** tab generates the WSUS command line from the values you prov
 | **Server Name** | Yes | The server on which updates are to be checked or installed. The example screen uses a Job Instance (JI) property. |
 | **Application Path** | Yes | The path to the Client component — either on the local target server or, as in the example screen, a shared UNC network path. |
 | **Retrieve Update List** | No | Tells the connector to retrieve a list of available updates without installing them. If cleared, applicable updates are downloaded and installed. |
-| **Include List** | No | Tells the connector to install only the updates listed in this file. |
-| **Exclude List** | No | Tells the connector to install all updates for this server except those listed in this file. |
+| **Include List** | No | Tells the connector to install only the updates listed in this file. Refer to [Include and Exclude lists](operation#include-and-exclude-lists) for the file format. |
+| **Exclude List** | No | Tells the connector to install all updates for this server except those listed in this file. Ignored if an **Include List** is also supplied — refer to [Include and Exclude lists](operation#include-and-exclude-lists). |
+| **Restart** | No | Allows the connector to restart the server when an update requires it. Refer to [Restart behavior](operation#restart-behavior). |
 
 ### User ID values
 
